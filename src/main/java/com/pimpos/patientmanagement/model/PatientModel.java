@@ -2,6 +2,7 @@ package com.pimpos.patientmanagement.model;
 
 import jakarta.persistence.*;
 
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public class PatientModel {
     private String name;
     @Column(nullable = false)
     private String age;
-    @Column(nullable = false, unique = true, length = 14)
+    @Column(nullable = false, unique = true, length = 14 )
     private String cpf;
     @Column(nullable = false)
     private LocalDate birthdate;
