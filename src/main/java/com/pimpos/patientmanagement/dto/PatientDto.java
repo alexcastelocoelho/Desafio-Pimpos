@@ -1,5 +1,6 @@
 package com.pimpos.patientmanagement.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
@@ -15,6 +16,7 @@ public class PatientDto {
     @Size(min = 14, max = 14)
     @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$")
     private String cpf;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull
     private LocalDate birthdate;
     @NotBlank
