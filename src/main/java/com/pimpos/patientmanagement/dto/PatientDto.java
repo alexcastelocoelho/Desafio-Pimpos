@@ -8,20 +8,22 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDate;
 
 public class PatientDto {
-    @NotBlank
+    @NotBlank(message = "enter yout name")
+    @Size(min = 3, max = 40, message = "your name must have at least three letters")
     private String name;
-    @NotBlank
+    @NotBlank(message = "enter your age")
     private String age;
     @NotBlank
     @Size(min = 14, max = 14)
-    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$")
+    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$", message = "use format xxx.xxx.xxx-xx")
     private String cpf;
     @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull
     private LocalDate birthdate;
-    @NotBlank
+    @NotBlank(message = "enter your contact")
+    @Pattern(regexp ="^\\(?\\d{2}\\)?[\\s-]?[\\s9]?\\d{4}-?\\d{4}$", message = "enter the ddd plus the number(only numbers)")
     private String contact;
-    @NotBlank
+    @NotBlank(message = "inform your address")
     private String address;
 
     public String getName() {
