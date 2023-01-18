@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/patients")
@@ -39,7 +37,7 @@ public class PatientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> listOne(@PathVariable(value = "id") UUID id) {
-        Optional<PatientModel> patientOptional = patientService.findById(id); //optional de user
+        Optional<PatientModel> patientOptional = patientService.findById(id);
         if (!patientOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("patient not found");
         }
