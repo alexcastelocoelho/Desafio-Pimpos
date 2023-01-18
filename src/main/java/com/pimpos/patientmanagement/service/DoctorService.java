@@ -31,4 +31,8 @@ public class DoctorService {
     public void delete(DoctorModel doctorModel) {
         doctorRepository.delete(doctorModel);
     }
+
+    public boolean existsByCpf(String cpf) {
+        return  doctorRepository.existsByCpf(cpf);
+    }
 }
