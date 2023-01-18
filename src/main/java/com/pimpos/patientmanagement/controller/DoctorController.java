@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/doctors")
@@ -28,9 +25,9 @@ public class DoctorController {
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody @Valid DoctorDto doctorDto) {
-//        if(doctorService.existsByCpf(doctorDto.getCpf())) {
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: cpf is already in use");
-//        }
+        if(doctorService.existsByCpf(doctorDto.getCpf())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: cpf already exists");
+        }
         DoctorModel doctorModel = new DoctorModel();
         BeanUtils.copyProperties(doctorDto, doctorModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.save(doctorModel));
@@ -43,7 +40,7 @@ public class DoctorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> listOne(@PathVariable(value = "id") UUID id) {
-        Optional<DoctorModel> doctorModelOptional = doctorService.findById(id); //optional de user
+        Optional<DoctorModel> doctorModelOptional = doctorService.findById(id);
         if (!doctorModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not found");
         }
