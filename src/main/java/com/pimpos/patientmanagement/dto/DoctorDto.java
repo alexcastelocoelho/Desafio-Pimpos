@@ -16,7 +16,7 @@ public class DoctorDto {
     private String adviceNumber;
     @NotBlank
     @Size(min = 14, max = 14)
-    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$")
+    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$", message = "use format xxx.xxx.xxx-xx" )
     private String cpf;
     @NotBlank(message = "inform your address")
     private String address;
