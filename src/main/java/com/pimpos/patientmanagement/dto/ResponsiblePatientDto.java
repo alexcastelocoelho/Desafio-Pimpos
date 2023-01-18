@@ -1,19 +1,19 @@
 package com.pimpos.patientmanagement.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
 public class ResponsiblePatientDto {
-    @NotBlank
+    @NotBlank(message = "enter your name")
+    @Min(value = 2, message = "your name must have at least two letters")
     private String name;
     @NotBlank
     @Size(min = 14, max = 14)
     @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$")
     private String cpf;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull
     private LocalDate birthdate;
     @NotBlank
