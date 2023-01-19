@@ -7,20 +7,21 @@ import java.time.LocalDate;
 
 public class ResponsiblePatientDto {
     @NotBlank(message = "enter your name")
-    @Min(value = 2, message = "your name must have at least two letters")
+    @Size(min = 3, max = 40, message = "your name must have at least three letters")
     private String name;
     @NotBlank
     @Size(min = 14, max = 14)
-    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$")
+    @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$", message = "use format xxx.xxx.xxx-xx")
     private String cpf;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotNull
+    @NotNull(message = "enter your birthdate")
     private LocalDate birthdate;
-    @NotBlank
+    @NotBlank(message = "inform the responsible relationship with the patient" )
     private String kinship;
-    @NotBlank
+    @NotBlank(message = "enter your contact")
+    @Pattern(regexp ="^\\(?\\d{2}\\)?[\\s-]?[\\s9]?\\d{4}-?\\d{4}$", message = "enter the ddd plus the number(only numbers)")
     private String contact;
-    @NotBlank
+    @NotBlank(message = "inform your address")
     private String address;
 
     public String getName() {
