@@ -3,6 +3,8 @@ package com.pimpos.patientmanagement.service;
 import com.pimpos.patientmanagement.model.PatientModel;
 import com.pimpos.patientmanagement.model.ResponsiblePatientModel;
 import com.pimpos.patientmanagement.repository.ResponsiblePatientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +27,8 @@ public class ResponsiblePatientService {
         return responsiblePatientRepository.existsByCpf(cpf);
     }
 
-    public List<ResponsiblePatientModel> findAll() {
-        return responsiblePatientRepository.findAll();
+    public Page<ResponsiblePatientModel> findAll(Pageable pageable) {
+        return responsiblePatientRepository.findAll(pageable);
     }
 
     public Optional<ResponsiblePatientModel> findById(UUID id) {
