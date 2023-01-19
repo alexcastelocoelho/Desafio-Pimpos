@@ -16,7 +16,7 @@ public class MedicalAppointmentModel {
     private LocalDate consultationDate;
     @Column(nullable = false)
     private LocalTime hour;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
     private PatientModel patient;
     @ManyToOne
