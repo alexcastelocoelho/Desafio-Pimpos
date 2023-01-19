@@ -14,7 +14,7 @@ import java.time.LocalTime;
 
 public class MedicalAppointmentDto {
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotNull
+    @NotNull(message = "inform the date of the medical appointment")
     private LocalDate consultationDate;
     @JsonFormat(pattern = "HH:mm")
     @NotNull(message = "inform the appointment time")
@@ -23,7 +23,7 @@ public class MedicalAppointmentDto {
     private PatientModel patient;
     @NotNull(message = "inform the doctor of the appointment")
     private DoctorModel doctor;
-    @NotBlank
+    @NotBlank(message = "report medical appointment status")
     private String status;
 
     public LocalDate getConsultationDate() {
