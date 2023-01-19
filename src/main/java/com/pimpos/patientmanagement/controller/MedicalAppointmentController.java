@@ -7,6 +7,10 @@ import com.pimpos.patientmanagement.model.MedicalAppointmentModel;
 import com.pimpos.patientmanagement.service.MedicalAppointmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,18 +31,14 @@ public class MedicalAppointmentController {
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody @Valid MedicalAppointmentDto medicalAppointmentDto) {
-//        if(doctorService.existsByCpf(doctorDto.getCpf())) {
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: cpf is already in use");
-//        }
-
         MedicalAppointmentModel medicalAppointmentModel = new MedicalAppointmentModel();
         BeanUtils.copyProperties(medicalAppointmentDto, medicalAppointmentModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(medicalAppointmentService.save(medicalAppointmentModel));
     }
 
     @GetMapping
-    public ResponseEntity<List<MedicalAppointmentModel>> list() {
-        return ResponseEntity.status(HttpStatus.OK).body(medicalAppointmentService.findAll());
+    public ResponseEntity<Page<MedicalAppointmentModel>> list(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).body(medicalAppointmentService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
