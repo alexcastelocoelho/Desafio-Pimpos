@@ -8,6 +8,10 @@ import com.pimpos.patientmanagement.model.ResponsiblePatientModel;
 import com.pimpos.patientmanagement.service.DoctorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +38,8 @@ public class DoctorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DoctorModel>> list() {
-        return ResponseEntity.status(HttpStatus.OK).body(doctorService.findAll());
+    public ResponseEntity<Page<DoctorModel>> list(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).body(doctorService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
