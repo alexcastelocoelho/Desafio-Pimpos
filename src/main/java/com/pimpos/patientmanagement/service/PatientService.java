@@ -2,6 +2,8 @@ package com.pimpos.patientmanagement.service;
 
 import com.pimpos.patientmanagement.model.PatientModel;
 import com.pimpos.patientmanagement.repository.PatientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class PatientService {
         return patientRepository.save(patientModel);
     }
 
-    public List<PatientModel> findAll() {
-        return patientRepository.findAll();
+    public Page<PatientModel> findAll(Pageable pageable) {
+        return patientRepository.findAll(pageable);
     }
 
     public Optional<PatientModel> findById(UUID id) {

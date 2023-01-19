@@ -5,6 +5,10 @@ import com.pimpos.patientmanagement.model.PatientModel;
 import com.pimpos.patientmanagement.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +35,8 @@ public class PatientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PatientModel>> list() {
-        return ResponseEntity.status(HttpStatus.OK).body(patientService.findAll());
+    public ResponseEntity<Page<PatientModel>> list(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).body(patientService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
